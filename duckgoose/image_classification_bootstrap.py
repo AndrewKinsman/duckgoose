@@ -42,28 +42,7 @@ def download_paths_exist(image_classes, download_path):
     exists = [path.exists(path.join(download_path, x)) for x in image_classes]
     return all(exists)
 
-def processDuplicates(base_path):
-    gg = f'{base_path}/**/*.jpg'
-
-    files = glob.glob(gg, recursive=True)
-    image_hashes = defaultdict(list)
-    
-    for ff in files:
-        image_hashes[file_hash(ff)].append(ff)
-
-    duplicates = {k:v for k,v in image_hashes.items() if len(v) > 1}
-        
-    for dd in duplicates.values():
-        if all_of_same_class(dd, base_path):
-
-
-
-def all_of_same_class(dupes, base_path):
-    return len(set([extract_class_for(dd, base_path) for dd in dupes]))
-
-def extract_class_for(dd, base_path):
-
-                
+            
 def file_hash(filepath):
     with open(filepath, "rb") as f:
             return md5(f.read()).hexdigest()
